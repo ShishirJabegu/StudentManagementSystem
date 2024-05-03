@@ -1,0 +1,55 @@
+﻿@model List<StudentManagementSystem.Models.Student>
+@{
+    ViewData["Title"] = "Students";
+}
+<div class="container">
+    <a class="mb-1 btn btn-primary" asp-action="AddStudent" asp-controller="Student">Register</a>
+    <div class="col-md-10">
+        <div class="mb-2" style="background:#0075A2">
+            <h3 class="p-2"><b>Students Dashboard</b></h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Grade</th>
+                    <th>RollNo</th>
+                    <th>Faculty</th>
+                    <th>Sex</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var data in Model)
+                    {
+                        <tr>
+                            <th>@data.Name</th>
+                            <th>@data.Address</th>
+                            <th>@data.Grade</th>
+                            <th>@data.RollNo</th>
+                            <th>@data.Faculty</th>
+                            <th>@data.Sex</th>
+                            <th class="d-flex justify-content-between">
+                                <a asp-action="Delete" asp-controller="Student" asp-route-id="@data.Id" class="bg-danger text-light p-1">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </a>
+                                <a asp-action="EditStudent" asp-controller="Student" asp-route-id="@data.Id" class="bg-success text-light p-1">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </a>
+                            </th>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="alert alert-danger" role="alert">
+                        <td colspan="6">No Data Found</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
